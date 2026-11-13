@@ -358,3 +358,20 @@
             font-weight: 600;
             letter-spacing: 2px;
             color: var(--sage-green);
+setInterval(updateCountdown, 1000);
+// Bilingual RSVP Confirmation
+document.getElementById("rsvpForm").addEventListener("submit", function(e) {
+e.preventDefault();
+const name = document.getElementById("guestName").value;
+const status = document.getElementById("attendance").value;
+const msgBox = document.getElementById("rsvpMessage");
+msgBox.style.display = "block";
+if (currentLang === 'ar') {
+const arStatus = status === 'accept' ? 'تأكيد الحضور' : 'الاعتذار عن الحضور';
+msgBox.innerHTML = شكراً لك يا <strong>${name}</strong>! تم تسجيل ردك (<em>${arStatus}</em>) بنجاح.;
+} else {
+const enStatus = status === 'accept' ? 'Joyfully Accepts' : 'Regretfully Declines';
+msgBox.innerHTML = Thank you, <strong>${name}</strong>! Your response (<em>${enStatus}</em>) has been saved.;
+}
+this.reset();
+});
