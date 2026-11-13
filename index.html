@@ -65,7 +65,7 @@ input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood
     <p class="tag" data-k="t2">Location &amp; Time</p>
     <p style="font-size:1.2rem" data-k="d2">December 3, 2026 — 7:00 PM</p>
     <p style="margin-top:8px" data-k="v1">La Novia Wedding Hall</p>
-    <a class="btn" href="https://goo.gl" target="_blank" data-k="mp">Open Google Maps</a>
+    <a class="btn" href="https://goo.gl" target="_blank" rel="noopener" data-k="mp">Open Google Maps</a>
   </div>
 
   <div class="card">
@@ -85,26 +85,34 @@ input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood
           <button type="button" class="qb" onclick="st(1)">+</button>
         </div>
       </div>
-      <button type="submit" class="btn" style="background:var(--terra);width:100%" data-k="sb">Confirm / تأكيد</button>
+      <button type="submit" class="btn" style="background:var(--terra);width:100%" data-k="sb">Confirm via WhatsApp</button>
     </form>
-    <p id="msg" style="margin-top:12px;color:var(--sage);font-weight:600"></p>
   </div>
 </div>
 
 <script>
+const WA = "201023967171";
 let L='en',c=1;
 const T={
-  en:{lb:'عربي',t1:'Together with their families',g:'Mohamed',b:'Ghada',d1:'Thursday, December 3, 2026',v1:'La Novia Wedding Hall',dy:'Days',hr:'Hours',mn:'Mins',sc:'Secs',t2:'Location & Time',d2:'December 3, 2026 — 7:00 PM',mp:'Open Google Maps',rt:'Attending Confirmation',sp:'Will you attend?',oy:'Joyfully Accepts',on:'Regretfully Declines',gl:'Guests',sb:'Confirm'},
-  ar:{lb:'English',t1:'يتشرفان بدعوتكم لحضور حفل زفافهما',g:'محمد',b:'غادة',d1:'الخميس، ٣ ديسمبر ٢٠٢٦',v1:'قاعة لا نوفيا (La Novia)',dy:'يوم',hr:'ساعة',mn:'دقيقة',sc:'ثانية',t2:'المكان والوقت',d2:'٣ ديسمبر ٢٠٢٦ — ٧:٠٠ مساءً',mp:'فتح الموقع على خرائط جوجل',rt:'تأكيد الحضور',sp:'هل ستشرفنا بالحضور؟',oy:'بكل سرور، سأحضر',on:'أعتذر عن الحضور',gl:'عدد الحضور',sb:'إرسال التأكيد'}
+  en:{lb:'عربي',t1:'Together with their families',g:'Mohamed',b:'Ghada',d1:'Thursday, December 3, 2026',v1:'La Novia Wedding Hall',dy:'Days',hr:'Hours',mn:'Mins',sc:'Secs',t2:'Location & Time',d2:'December 3, 2026 — 7:00 PM',mp:'Open Google Maps',rt:'Attending Confirmation',sp:'Will you attend?',oy:'Joyfully Accepts',on:'Regretfully Declines',gl:'Guests',sb:'Confirm via WhatsApp'},
+  ar:{lb:'English',t1:'يتشرفان بدعوتكم لحضور حفل زفافهما',g:'محمد',b:'غادة',d1:'الخميس، ٣ ديسمبر ٢٠٢٦',v1:'قاعة لا نوفيا (La Novia)',dy:'يوم',hr:'ساعة',mn:'دقيقة',sc:'ثانية',t2:'المكان والوقت',d2:'٣ ديسمبر ٢٠٢٦ — ٧:٠٠ مساءً',mp:'فتح الموقع على خرائط جوجل',rt:'تأكيد الحضور',sp:'هل ستشرفنا بالحضور؟',oy:'بكل سرور، سأحضر',on:'أعتذر عن الحضور',gl:'عدد الحضور',sb:'إرسال التأكيد عبر واتساب'}
 };
 function setL(l){L=l;document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';document.getElementById('lb').innerText=T[l].lb;document.querySelectorAll('[data-k]').forEach(e=>e.innerText=T[l][e.dataset.k])}
 function go(l){setL(l);document.getElementById('cover').classList.add('hide');document.getElementById('mn').classList.add('show')}
 function tog(){setL(L==='en'?'ar':'en')}
 function st(n){c=Math.min(10,Math.max(1,c+n));document.getElementById('gc').innerText=c}
 const tg=new Date("2026-12-03T19:00:00+02:00").getTime();
-function tk(){const df=tg-Date.now();if(df<=0)return;document.getElementById('d').innerText=Math.floor(df/864e5);document.getElementById('h').innerText=Math.floor(df%864e5/36e5);document.getElementById('m').innerText=Math.floor(df%36e5/6e4);document.getElementById('s').innerText=Math.floor(df%6e4/1e3)}
+function tk(){const df=tg-Date.now();if(df<=0)return;document.getElementById('d').innerText=Math.floor(df/864e5);document.getElementById('h').innerText=String(Math.floor(df%864e5/36e5)).padStart(2,'0');document.getElementById('m').innerText=String(Math.floor(df%36e5/6e4)).padStart(2,'0');document.getElementById('s').innerText=String(Math.floor(df%6e4/1e3)).padStart(2,'0')}
 tk();setInterval(tk,1000);
-document.getElementById('rf').onsubmit=e=>{e.preventDefault();document.getElementById('msg').innerText=L==='ar'?`تم تسجيل ردك (${c} أفراد) بنجاح!`:`Thank you! Confirmed for ${c} guest(s).`;e.target.reset();c=1;document.getElementById('gc').innerText=1};
+
+document.getElementById('rf').onsubmit=e=>{
+  e.preventDefault();
+  const n=document.getElementById('gn').value,s=document.getElementById('at').value;
+  const txt=L==='ar'
+    ?`تأكيد حضور حفل زفاف محمد وغادة:\nالاسم: ${n}\nالحالة: ${s==='yes'?'سأحضر بكل سرور':'أعتذر عن الحضور'}\nعدد الأفراد: ${c}`
+    :`Mohamed & Ghada Wedding Confirmation:\nName: ${n}\nStatus: ${s==='yes'?'Joyfully Accepts':'Regretfully Declines'}\nGuests: ${c}`;
+  window.open(`https://wa.me{WA}?text=${encodeURIComponent(txt)}`,'_blank');
+};
 </script>
 </body>
 </html>
