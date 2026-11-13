@@ -65,12 +65,12 @@ input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood
     <p class="tag" data-k="t2">Location &amp; Time</p>
     <p style="font-size:1.2rem" data-k="d2">December 3, 2026 — 7:00 PM</p>
     <p style="margin-top:8px" data-k="v1">La Novia Wedding Hall</p>
-    <a class="btn" href="https://goo.gl" target="_blank" rel="noopener" data-k="mp">Open Google Maps</a>
+    <a class="btn" href="https://google.com" data-k="mp">Open Google Maps</a>
   </div>
 
   <div class="card">
     <p class="tag" data-k="rt">Attending Confirmation</p>
-    <form id="rf">
+    <form id="rf" onsubmit="sendWA(event)">
       <input type="text" id="gn" placeholder="Full Name / الاسم بالكامل" required>
       <select id="at" required>
         <option value="" disabled selected data-k="sp">Will you attend? / هل ستحضر؟</option>
@@ -105,14 +105,14 @@ const tg=new Date("2026-12-03T19:00:00+02:00").getTime();
 function tk(){const df=tg-Date.now();if(df<=0)return;document.getElementById('d').innerText=Math.floor(df/864e5);document.getElementById('h').innerText=String(Math.floor(df%864e5/36e5)).padStart(2,'0');document.getElementById('m').innerText=String(Math.floor(df%36e5/6e4)).padStart(2,'0');document.getElementById('s').innerText=String(Math.floor(df%6e4/1e3)).padStart(2,'0')}
 tk();setInterval(tk,1000);
 
-document.getElementById('rf').onsubmit=e=>{
+function sendWA(e){
   e.preventDefault();
-  const n=document.getElementById('gn').value,s=document.getElementById('at').value;
+  const n=document.getElementById('gn').value.trim(),s=document.getElementById('at').value;
   const txt=L==='ar'
     ?`تأكيد حضور حفل زفاف محمد وغادة:\nالاسم: ${n}\nالحالة: ${s==='yes'?'سأحضر بكل سرور':'أعتذر عن الحضور'}\nعدد الأفراد: ${c}`
     :`Mohamed & Ghada Wedding Confirmation:\nName: ${n}\nStatus: ${s==='yes'?'Joyfully Accepts':'Regretfully Declines'}\nGuests: ${c}`;
-  window.open(`https://wa.me{WA}?text=${encodeURIComponent(txt)}`,'_blank');
-};
+  window.location.href=`https://whatsapp.com{WA}&text=${encodeURIComponent(txt)}`;
+}
 </script>
 </body>
 </html>
