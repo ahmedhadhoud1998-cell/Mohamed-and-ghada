@@ -12,11 +12,15 @@ body{background:var(--bg);color:var(--ink);font-family:'Lora',serif;text-align:c
 html[lang="ar"] body{font-family:'Cairo',sans-serif}
 html[lang="ar"] .script{font-family:'Amiri',serif;font-weight:700}
 .script{font-family:'Alex Brush',cursive}
-#cover{position:fixed;inset:0;z-index:99;background:radial-gradient(#4B3B2F,#2B211A);display:flex;align-items:center;justify-content:center;padding:20px;color:#FAF6F0}
+#cover{position:fixed;inset:0;z-index:99;background:radial-gradient(#4B3B2F,#2B211A);display:flex;align-items:center;justify-content:center;padding:20px;color:#FAF6F0;transition:opacity .7s,transform .7s,visibility .7s}
+#cover.hide{opacity:0;transform:scale(1.06);visibility:hidden;pointer-events:none}
 .c-box{border:1px solid rgba(250,246,240,.4);padding:40px 22px;max-width:440px;width:100%;border-radius:6px}
 .c-btn{padding:12px 20px;border:none;border-radius:4px;color:#FFF;font-weight:600;cursor:pointer;margin:6px;min-width:140px}
 .wrap{max-width:600px;margin:0 auto;padding:16px}
-.card{background:var(--card);border:2px solid var(--wood);padding:32px 18px;margin-bottom:18px;border-radius:6px}
+.card{background:var(--card);border:2px solid var(--wood);padding:32px 18px;margin-bottom:18px;border-radius:6px;opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.wrap.show .card{opacity:1;transform:translateY(0)}
+.wrap.show .card:nth-child(3){transition-delay:.15s}
+.wrap.show .card:nth-child(4){transition-delay:.3s}
 .tag{font-size:.78rem;font-weight:600;color:var(--sage);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
 html[lang="ar"] .tag{letter-spacing:0;font-size:.9rem}
 .names{font-size:clamp(3.2rem,9vw,4.8rem);line-height:1.1;margin:8px 0}
@@ -25,6 +29,8 @@ html[lang="ar"] .tag{letter-spacing:0;font-size:.9rem}
 .tb span{display:block;font-size:1.4rem;font-weight:600;color:var(--terra)}
 .btn{display:inline-block;margin-top:14px;padding:11px 22px;background:var(--sage);color:#FFF;text-decoration:none;border-radius:4px;font-weight:600;border:none;cursor:pointer}
 input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood);background:var(--bg);border-radius:4px;font-family:inherit}
+.qty{display:flex;align-items:center;justify-content:space-between;background:var(--bg);border:1px solid var(--wood);border-radius:4px;padding:6px 12px;margin-top:10px}
+.qb{width:30px;height:30px;border:none;border-radius:4px;background:var(--sage);color:#FFF;font-size:1.1rem;font-weight:600;cursor:pointer}
 </style>
 </head>
 <body>
@@ -39,7 +45,7 @@ input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood
   </div>
 </div>
 
-<div class="wrap">
+<div class="wrap" id="mn">
   <div style="text-align:end;margin-bottom:10px"><button class="btn" style="margin:0;padding:6px 14px;font-size:.8rem" id="lb" onclick="tog()">عربي</button></div>
 
   <div class="card">
@@ -59,12 +65,11 @@ input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood
     <p class="tag" data-k="t2">Location &amp; Time</p>
     <p style="font-size:1.2rem" data-k="d2">December 3, 2026 — 7:00 PM</p>
     <p style="margin-top:8px" data-k="v1">La Novia Wedding Hall</p>
-    <p style="font-size:.9rem;color:#6D5D50" data-k="ad">Cairo - Suez Road, near Madinaty</p>
-    <a class="btn" href="https://google.com" target="_blank" data-k="mp">Open Google Maps</a>
+    <a class="btn" href="https://goo.gl" target="_blank" data-k="mp">Open Google Maps</a>
   </div>
 
   <div class="card">
-    <p class="tag" data-k="rt">RSVP</p>
+    <p class="tag" data-k="rt">Attending Confirmation</p>
     <form id="rf">
       <input type="text" id="gn" placeholder="Full Name / الاسم بالكامل" required>
       <select id="at" required>
@@ -72,7 +77,14 @@ input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood
         <option value="yes" data-k="oy">Joyfully Accepts / سأحضر بكل سرور</option>
         <option value="no" data-k="on">Regretfully Declines / أعتذر عن الحضور</option>
       </select>
-      <input type="number" min="1" max="10" placeholder="Guests / عدد الحضور" required>
+      <div class="qty">
+        <span data-k="gl">Guests / عدد الحضور</span>
+        <div style="display:flex;align-items:center;gap:10px;direction:ltr">
+          <button type="button" class="qb" onclick="st(-1)">-</button>
+          <b id="gc">1</b>
+          <button type="button" class="qb" onclick="st(1)">+</button>
+        </div>
+      </div>
       <button type="submit" class="btn" style="background:var(--terra);width:100%" data-k="sb">Confirm / تأكيد</button>
     </form>
     <p id="msg" style="margin-top:12px;color:var(--sage);font-weight:600"></p>
@@ -80,17 +92,19 @@ input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood
 </div>
 
 <script>
-let L='en';
+let L='en',c=1;
 const T={
-  en:{lb:'عربي',t1:'Together with their families',g:'Mohamed',b:'Ghada',d1:'Thursday, December 3, 2026',v1:'La Novia Wedding Hall',dy:'Days',hr:'Hours',mn:'Mins',sc:'Secs',t2:'Location & Time',d2:'December 3, 2026 — 7:00 PM',ad:'Cairo - Suez Road, near Madinaty',mp:'Open Google Maps',rt:'RSVP',sp:'Will you attend?',oy:'Joyfully Accepts',on:'Regretfully Declines',sb:'Confirm RSVP'},
-  ar:{lb:'English',t1:'يتشرفان بدعوتكم لحضور حفل زفافهما',g:'محمد',b:'غادة',d1:'الخميس، ٣ ديسمبر ٢٠٢٦',v1:'قاعة لا نوفيا (La Novia)',dy:'يوم',hr:'ساعة',mn:'دقيقة',sc:'ثانية',t2:'المكان والوقت',d2:'٣ ديسمبر ٢٠٢٦ — ٧:٠٠ مساءً',ad:'طريق القاهرة - السويس، بجوار مدينتي',mp:'فتح الموقع على خرائط جوجل',rt:'تأكيد الحضور',sp:'هل ستشرفنا بالحضور؟',oy:'بكل سرور، سأحضر',on:'أعتذر عن الحضور',sb:'إرسال التأكيد'}
+  en:{lb:'عربي',t1:'Together with their families',g:'Mohamed',b:'Ghada',d1:'Thursday, December 3, 2026',v1:'La Novia Wedding Hall',dy:'Days',hr:'Hours',mn:'Mins',sc:'Secs',t2:'Location & Time',d2:'December 3, 2026 — 7:00 PM',mp:'Open Google Maps',rt:'Attending Confirmation',sp:'Will you attend?',oy:'Joyfully Accepts',on:'Regretfully Declines',gl:'Guests',sb:'Confirm'},
+  ar:{lb:'English',t1:'يتشرفان بدعوتكم لحضور حفل زفافهما',g:'محمد',b:'غادة',d1:'الخميس، ٣ ديسمبر ٢٠٢٦',v1:'قاعة لا نوفيا (La Novia)',dy:'يوم',hr:'ساعة',mn:'دقيقة',sc:'ثانية',t2:'المكان والوقت',d2:'٣ ديسمبر ٢٠٢٦ — ٧:٠٠ مساءً',mp:'فتح الموقع على خرائط جوجل',rt:'تأكيد الحضور',sp:'هل ستشرفنا بالحضور؟',oy:'بكل سرور، سأحضر',on:'أعتذر عن الحضور',gl:'عدد الحضور',sb:'إرسال التأكيد'}
 };
 function setL(l){L=l;document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';document.getElementById('lb').innerText=T[l].lb;document.querySelectorAll('[data-k]').forEach(e=>e.innerText=T[l][e.dataset.k])}
-function go(l){setL(l);document.getElementById('cover').style.display='none'}
+function go(l){setL(l);document.getElementById('cover').classList.add('hide');document.getElementById('mn').classList.add('show')}
 function tog(){setL(L==='en'?'ar':'en')}
+function st(n){c=Math.min(10,Math.max(1,c+n));document.getElementById('gc').innerText=c}
 const tg=new Date("2026-12-03T19:00:00+02:00").getTime();
-setInterval(()=>{const df=tg-Date.now();if(df<=0)return;document.getElementById('d').innerText=Math.floor(df/864e5);document.getElementById('h').innerText=Math.floor(df%864e5/36e5);document.getElementById('m').innerText=Math.floor(df%36e5/6e4);document.getElementById('s').innerText=Math.floor(df%6e4/1e3)},1000);
-document.getElementById('rf').onsubmit=e=>{e.preventDefault();document.getElementById('msg').innerText=L==='ar'?'تم تسجيل ردك بنجاح!':'Thank you! Your RSVP is saved.';e.target.reset()};
+function tk(){const df=tg-Date.now();if(df<=0)return;document.getElementById('d').innerText=Math.floor(df/864e5);document.getElementById('h').innerText=Math.floor(df%864e5/36e5);document.getElementById('m').innerText=Math.floor(df%36e5/6e4);document.getElementById('s').innerText=Math.floor(df%6e4/1e3)}
+tk();setInterval(tk,1000);
+document.getElementById('rf').onsubmit=e=>{e.preventDefault();document.getElementById('msg').innerText=L==='ar'?`تم تسجيل ردك (${c} أفراد) بنجاح!`:`Thank you! Confirmed for ${c} guest(s).`;e.target.reset();c=1;document.getElementById('gc').innerText=1};
 </script>
 </body>
 </html>
