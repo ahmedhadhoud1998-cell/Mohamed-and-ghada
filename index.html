@@ -3,138 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mohamed &amp; Ghada | Wedding Invitation</title>
+<title>Mohamed &amp; Ghada</title>
 <link href="https://googleapis.com" rel="stylesheet">
 <style>
-:root{--bg:#F5EFE6;--card:#FAF6F0;--ink:#3E3229;--muted:#6D5D50;--sage:#586B53;--terra:#B5694D;--wood:#D5C7B6}
+:root{--bg:#F5EFE6;--card:#FAF6F0;--ink:#3E3229;--sage:#586B53;--terra:#B5694D;--wood:#D5C7B6}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'Nunito Sans',sans-serif;text-align:center;line-height:1.6}
+body{background:var(--bg);color:var(--ink);font-family:'Lora',serif;text-align:center;line-height:1.6}
 html[lang="ar"] body{font-family:'Cairo',sans-serif}
-html[lang="ar"] .serif,html[lang="ar"] .script{font-family:'Amiri',serif;font-weight:700}
-.serif{font-family:'Lora',serif}.script{font-family:'Alex Brush',cursive}
-
-/* Rustic Cover Screen (No External Images Needed) */
-#cover{position:fixed;inset:0;z-index:99;background:radial-gradient(circle at center,#4B3B2F 0%,#2B211A 100%);display:flex;align-items:center;justify-content:center;padding:20px;color:#FAF6F0;transition:opacity .5s,visibility .5s}
-#cover.hide{opacity:0;visibility:hidden;pointer-events:none}
-.c-box{border:1px solid rgba(250,246,240,.4);outline:1px solid rgba(250,246,240,.2);outline-offset:-8px;padding:42px 24px;max-width:480px;width:100%;background:rgba(35,26,20,.65);border-radius:6px}
-.c-names{font-family:'Alex Brush',cursive;font-size:clamp(3.2rem,10vw,4.6rem);line-height:1.1;margin:12px 0;color:#FFF}
-.c-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
-.c-btn{padding:12px 22px;border:none;border-radius:4px;color:#FFF;font-weight:600;cursor:pointer;min-width:150px;font-size:.92rem}
-
-/* Main Invitation */
-.top-bar{max-width:680px;margin:12px auto 0;padding:0 16px;text-align:end}
-.lang-btn{background:var(--card);border:1px solid var(--wood);color:var(--ink);padding:6px 14px;border-radius:20px;font-weight:600;cursor:pointer}
-.wrap{max-width:680px;margin:0 auto;padding:16px}
-.card{background:var(--card);border:2px solid var(--wood);outline:1px solid var(--sage);outline-offset:-8px;padding:38px 20px;margin-bottom:24px;border-radius:6px}
-.tag{text-transform:uppercase;letter-spacing:2.5px;font-size:.76rem;font-weight:600;color:var(--sage);margin-bottom:10px}
-html[lang="ar"] .tag{letter-spacing:0;font-size:.92rem}
-.names{font-size:clamp(3.3rem,9vw,5rem);line-height:1.1;margin:8px 0}
-.amp{font-family:'Lora',serif;font-style:italic;color:var(--terra);font-size:2.2rem;display:block}
-.cd{display:flex;justify-content:center;gap:10px;margin-top:24px;direction:ltr}
-.t-box{background:var(--bg);border:1px dashed var(--sage);padding:10px 12px;min-width:66px;border-radius:5px}
-.t-box span{display:block;font-family:'Lora',serif;font-size:1.6rem;font-weight:600;color:var(--terra)}
-.t-box small{font-size:.65rem;text-transform:uppercase;color:var(--muted);font-weight:600}
-.btn{display:inline-block;margin-top:14px;padding:12px 24px;background:var(--sage);color:#FFF;text-decoration:none;border-radius:4px;font-weight:600;font-size:.88rem;border:none;cursor:pointer}
-.form{display:flex;flex-direction:column;gap:12px;max-width:420px;margin:18px auto 0}
-input,select,textarea{width:100%;padding:11px;border:1px solid var(--wood);background:var(--bg);border-radius:4px;font-family:inherit;color:var(--ink)}
-#msg{display:none;margin-top:14px;padding:12px;background:#DCE3D8;border:1px solid var(--sage);border-radius:4px}
-footer{padding:24px;font-size:.85rem;color:var(--muted)}
+html[lang="ar"] .script{font-family:'Amiri',serif;font-weight:700}
+.script{font-family:'Alex Brush',cursive}
+#cover{position:fixed;inset:0;z-index:99;background:radial-gradient(#4B3B2F,#2B211A);display:flex;align-items:center;justify-content:center;padding:20px;color:#FAF6F0}
+.c-box{border:1px solid rgba(250,246,240,.4);padding:40px 22px;max-width:440px;width:100%;border-radius:6px}
+.c-btn{padding:12px 20px;border:none;border-radius:4px;color:#FFF;font-weight:600;cursor:pointer;margin:6px;min-width:140px}
+.wrap{max-width:600px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:2px solid var(--wood);padding:32px 18px;margin-bottom:18px;border-radius:6px}
+.tag{font-size:.78rem;font-weight:600;color:var(--sage);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+html[lang="ar"] .tag{letter-spacing:0;font-size:.9rem}
+.names{font-size:clamp(3.2rem,9vw,4.8rem);line-height:1.1;margin:8px 0}
+.cd{display:flex;justify-content:center;gap:8px;margin-top:20px;direction:ltr}
+.tb{background:var(--bg);border:1px dashed var(--sage);padding:8px 10px;min-width:60px;border-radius:4px}
+.tb span{display:block;font-size:1.4rem;font-weight:600;color:var(--terra)}
+.btn{display:inline-block;margin-top:14px;padding:11px 22px;background:var(--sage);color:#FFF;text-decoration:none;border-radius:4px;font-weight:600;border:none;cursor:pointer}
+input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood);background:var(--bg);border-radius:4px;font-family:inherit}
 </style>
 </head>
 <body>
 
 <div id="cover">
   <div class="c-box">
-    <svg width="46" height="46" viewBox="0 0 64 64" fill="none" stroke="#B7C9B0" stroke-width="2.2"><path d="M32 58V8M32 44C22 44 14 37 14 27c9 0 18 7 18 17zm0-10c10 0 18-7 18-17-9 0-18 7-18 17zm0-12c-8 0-14-5-14-13 7 0 14 5 14 13z"/></svg>
-    <p style="letter-spacing:2px;font-size:.78rem;text-transform:uppercase;color:#DFD3C3;margin-top:8px">Wedding Invitation • دعوة زفاف</p>
-    <div class="c-names">Mohamed &amp; Ghada</div>
-    <p class="serif" style="letter-spacing:2px;color:#EAE0D5">03 . 12 . 2026</p>
-    <div class="c-btns">
-      <button class="c-btn" style="background:var(--sage)" onclick="start('en')">Open in English</button>
-      <button class="c-btn" style="background:var(--terra);font-family:'Cairo',sans-serif" onclick="start('ar')">فتح الدعوة بالعربية</button>
-    </div>
+    <p style="font-size:.8rem;letter-spacing:2px;color:#DFD3C3">WEDDING INVITATION • دعوة زفاف</p>
+    <h1 class="script" style="font-size:3.5rem;margin:12px 0">Mohamed &amp; Ghada</h1>
+    <p style="margin-bottom:20px">03 . 12 . 2026</p>
+    <button class="c-btn" style="background:var(--sage)" onclick="go('en')">English</button>
+    <button class="c-btn" style="background:var(--terra)" onclick="go('ar')">عربي</button>
   </div>
 </div>
 
-<div class="top-bar"><button class="lang-btn" id="lBtn" onclick="toggle()">عربي</button></div>
-
 <div class="wrap">
+  <div style="text-align:end;margin-bottom:10px"><button class="btn" style="margin:0;padding:6px 14px;font-size:.8rem" id="lb" onclick="tog()">عربي</button></div>
+
   <div class="card">
-    <svg width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="#586B53" stroke-width="2.2"><path d="M32 58V8M32 44C22 44 14 37 14 27c9 0 18 7 18 17zm0-10c10 0 18-7 18-17-9 0-18 7-18 17zm0-12c-8 0-14-5-14-13 7 0 14 5 14 13z"/></svg>
     <p class="tag" data-k="t1">Together with their families</p>
-    <h1 class="names script"><span data-k="g">Mohamed</span><span class="amp">&amp;</span><span data-k="b">Ghada</span></h1>
-    <p class="serif" style="font-size:1.25rem;margin-top:10px" data-k="d1">Thursday, December 3, 2026</p>
-    <p style="color:var(--muted)" data-k="v1">La Novia Wedding Hall</p>
+    <h1 class="names script"><span data-k="g">Mohamed</span> &amp; <span data-k="b">Ghada</span></h1>
+    <p style="font-size:1.2rem" data-k="d1">Thursday, December 3, 2026</p>
+    <p style="color:#6D5D50" data-k="v1">La Novia Wedding Hall</p>
     <div class="cd" id="cd">
-      <div class="t-box"><span id="d">--</span><small data-k="dy">Days</small></div>
-      <div class="t-box"><span id="h">--</span><small data-k="hr">Hours</small></div>
-      <div class="t-box"><span id="m">--</span><small data-k="mn">Mins</small></div>
-      <div class="t-box"><span id="s">--</span><small data-k="sc">Secs</small></div>
+      <div class="tb"><span id="d">--</span><small data-k="dy">Days</small></div>
+      <div class="tb"><span id="h">--</span><small data-k="hr">Hours</small></div>
+      <div class="tb"><span id="m">--</span><small data-k="mn">Mins</small></div>
+      <div class="tb"><span id="s">--</span><small data-k="sc">Secs</small></div>
     </div>
   </div>
 
   <div class="card">
-    <p class="tag" data-k="t2">Wedding Celebration</p>
-    <p style="color:var(--muted);margin-bottom:18px" data-k="intro">We warmly invite you to share in our joy as we celebrate our marriage.</p>
-    <p class="tag" data-k="wl">Date &amp; Time</p>
-    <p class="serif" style="font-size:1.35rem" data-k="d2">December 3, 2026 — 7:00 PM</p>
-    <br>
-    <p class="tag" data-k="vl">Location</p>
-    <p class="serif" style="font-size:1.35rem" data-k="v1">La Novia Wedding Hall</p>
-    <p style="font-size:.9rem;color:var(--muted)" data-k="addr">Cairo - Suez Road, near Madinaty</p>
-    <a class="btn" href="https://google.com" target="_blank" rel="noopener" data-k="map">Open Google Maps</a>
+    <p class="tag" data-k="t2">Location &amp; Time</p>
+    <p style="font-size:1.2rem" data-k="d2">December 3, 2026 — 7:00 PM</p>
+    <p style="margin-top:8px" data-k="v1">La Novia Wedding Hall</p>
+    <p style="font-size:.9rem;color:#6D5D50" data-k="ad">Cairo - Suez Road, near Madinaty</p>
+    <a class="btn" href="https://google.com" target="_blank" data-k="mp">Open Google Maps</a>
   </div>
 
   <div class="card">
     <p class="tag" data-k="rt">RSVP</p>
-    <p style="color:var(--muted)" data-k="rs">Please confirm your attendance</p>
-    <form class="form" id="rForm">
-      <input type="text" id="gn" data-pe="Your Full Name" data-pa="الاسم بالكامل" placeholder="Your Full Name" required>
+    <form id="rf">
+      <input type="text" id="gn" placeholder="Full Name / الاسم بالكامل" required>
       <select id="at" required>
-        <option value="" disabled selected data-k="sp">Will you attend?</option>
-        <option value="yes" data-k="oy">Joyfully Accepts</option>
-        <option value="no" data-k="on">Regretfully Declines</option>
+        <option value="" disabled selected data-k="sp">Will you attend? / هل ستحضر؟</option>
+        <option value="yes" data-k="oy">Joyfully Accepts / سأحضر بكل سرور</option>
+        <option value="no" data-k="on">Regretfully Declines / أعتذر عن الحضور</option>
       </select>
-      <input type="number" min="1" max="10" data-pe="Number of Guests" data-pa="عدد الحضور" placeholder="Number of Guests" required>
-      <textarea rows="2" data-pe="Message for Mohamed & Ghada" data-pa="كلمة تهنئة لمحمد وغادة" placeholder="Message for Mohamed & Ghada"></textarea>
-      <button type="submit" class="btn" style="background:var(--terra);width:100%" data-k="sb">Send RSVP</button>
+      <input type="number" min="1" max="10" placeholder="Guests / عدد الحضور" required>
+      <button type="submit" class="btn" style="background:var(--terra);width:100%" data-k="sb">Confirm / تأكيد</button>
     </form>
-    <div id="msg"></div>
+    <p id="msg" style="margin-top:12px;color:var(--sage);font-weight:600"></p>
   </div>
 </div>
 
-<footer><p class="script" style="font-size:1.9rem;color:var(--ink)" data-k="fn">Mohamed &amp; Ghada</p><p data-k="fd">03.12.2026 • La Novia Wedding Hall</p></footer>
-
 <script>
-let lang='en';
-const txt={
-  en:{lBtn:'عربي',t1:'Together with their families',g:'Mohamed',b:'Ghada',d1:'Thursday, December 3, 2026',v1:'La Novia Wedding Hall',dy:'Days',hr:'Hours',mn:'Mins',sc:'Secs',t2:'Wedding Celebration',intro:'We warmly invite you to share in our joy as we celebrate our marriage.',wl:'Date & Time',d2:'December 3, 2026 — 7:00 PM',vl:'Location',addr:'Cairo - Suez Road, near Madinaty',map:'Open Google Maps',rt:'RSVP',rs:'Please confirm your attendance',sp:'Will you attend?',oy:'Joyfully Accepts',on:'Regretfully Declines',sb:'Send RSVP',fn:'Mohamed & Ghada',fd:'03.12.2026 • La Novia Wedding Hall'},
-  ar:{lBtn:'English',t1:'يتشرفان بدعوتكم لحضور حفل زفافهما',g:'محمد',b:'غادة',d1:'الخميس، ٣ ديسمبر ٢٠٢٦',v1:'قاعة لا نوفيا (La Novia)',dy:'يوم',hr:'ساعة',mn:'دقيقة',sc:'ثانية',t2:'حفل الزفاف',intro:'بكل الحب والسرور، ندعوكم لمشاركتنا فرحتنا الكبرى في ليلة العمر.',wl:'التاريخ والوقت',d2:'٣ ديسمبر ٢٠٢٦ — ٧:٠٠ مساءً',vl:'المكان',addr:'طريق القاهرة - السويس، بجوار مدينتي',map:'فتح الموقع على خرائط جوجل',rt:'تأكيد الحضور',rs:'يرجى تأكيد حضوركم',sp:'هل ستشرفنا بالحضور؟',oy:'بكل سرور، سأحضر',on:'أعتذر عن الحضور',sb:'إرسال التأكيد',fn:'محمد و غادة',fd:'٣ ديسمبر ٢٠٢٦ • قاعة لا نوفيا'}
+let L='en';
+const T={
+  en:{lb:'عربي',t1:'Together with their families',g:'Mohamed',b:'Ghada',d1:'Thursday, December 3, 2026',v1:'La Novia Wedding Hall',dy:'Days',hr:'Hours',mn:'Mins',sc:'Secs',t2:'Location & Time',d2:'December 3, 2026 — 7:00 PM',ad:'Cairo - Suez Road, near Madinaty',mp:'Open Google Maps',rt:'RSVP',sp:'Will you attend?',oy:'Joyfully Accepts',on:'Regretfully Declines',sb:'Confirm RSVP'},
+  ar:{lb:'English',t1:'يتشرفان بدعوتكم لحضور حفل زفافهما',g:'محمد',b:'غادة',d1:'الخميس، ٣ ديسمبر ٢٠٢٦',v1:'قاعة لا نوفيا (La Novia)',dy:'يوم',hr:'ساعة',mn:'دقيقة',sc:'ثانية',t2:'المكان والوقت',d2:'٣ ديسمبر ٢٠٢٦ — ٧:٠٠ مساءً',ad:'طريق القاهرة - السويس، بجوار مدينتي',mp:'فتح الموقع على خرائط جوجل',rt:'تأكيد الحضور',sp:'هل ستشرفنا بالحضور؟',oy:'بكل سرور، سأحضر',on:'أعتذر عن الحضور',sb:'إرسال التأكيد'}
 };
-function setL(l){
-  lang=l;document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';
-  document.getElementById('lBtn').innerText=txt[l].lBtn;
-  document.querySelectorAll('[data-k]').forEach(e=>{if(txt[l][e.dataset.k])e.innerText=txt[l][e.dataset.k]});
-  document.querySelectorAll('[data-pe]').forEach(e=>{e.placeholder=l==='ar'?e.dataset.pa:e.dataset.pe});
-}
-function start(l){setL(l);document.getElementById('cover').classList.add('hide')}
-function toggle(){setL(lang==='en'?'ar':'en')}
-
-const target=new Date("2026-12-03T19:00:00+02:00").getTime();
-function tick(){
-  const diff=target-Date.now();
-  if(diff<=0){document.getElementById('cd').innerHTML="<b>Today is the day!</b>";return}
-  document.getElementById('d').innerText=String(Math.floor(diff/864e5)).padStart(2,'0');
-  document.getElementById('h').innerText=String(Math.floor(diff%864e5/36e5)).padStart(2,'0');
-  document.getElementById('m').innerText=String(Math.floor(diff%36e5/6e4)).padStart(2,'0');
-  document.getElementById('s').innerText=String(Math.floor(diff%6e4/1e3)).padStart(2,'0');
-}
-tick();setInterval(tick,1000);
-
-document.getElementById('rForm').onsubmit=function(e){
-  e.preventDefault();
-const n=document.getElementById('gn').value,m=document.getElementById('msg');
-m.style.display='block';
-m.innerHTML=lang==='ar'?شكراً لك يا <b>${n}</b>! تم تسجيل ردك بنجاح.:Thank you, <b>${n}</b>! Your response has been saved.;
-this.reset();
-};
+function setL(l){L=l;document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';document.getElementById('lb').innerText=T[l].lb;document.querySelectorAll('[data-k]').forEach(e=>e.innerText=T[l][e.dataset.k])}
+function go(l){setL(l);document.getElementById('cover').style.display='none'}
+function tog(){setL(L==='en'?'ar':'en')}
+const tg=new Date("2026-12-03T19:00:00+02:00").getTime();
+setInterval(()=>{const df=tg-Date.now();if(df<=0)return;document.getElementById('d').innerText=Math.floor(df/864e5);document.getElementById('h').innerText=Math.floor(df%864e5/36e5);document.getElementById('m').innerText=Math.floor(df%36e5/6e4);document.getElementById('s').innerText=Math.floor(df%6e4/1e3)},1000);
+document.getElementById('rf').onsubmit=e=>{e.preventDefault();document.getElementById('msg').innerText=L==='ar'?'تم تسجيل ردك بنجاح!':'Thank you! Your RSVP is saved.';e.target.reset()};
+</script>
+</body>
+</html>
