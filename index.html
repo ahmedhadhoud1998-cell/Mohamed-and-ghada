@@ -1,377 +1,140 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed &amp; Ghada | Wedding Invitation</title>
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --parchment: #F5EFE6;
-            --kraft-card: #FAF6F0;
-            --bark-brown: #3E3229;
-            --warm-taupe: #6D5D50;
-            --sage-green: #586B53;
-            --sage-light: #DCE3D8;
-            --terracotta: #B5694D;
-            --border-wood: #D5C7B6;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed &amp; Ghada | Wedding Invitation</title>
+<link href="https://googleapis.com" rel="stylesheet">
+<style>
+:root{--bg:#F5EFE6;--card:#FAF6F0;--ink:#3E3229;--muted:#6D5D50;--sage:#586B53;--terra:#B5694D;--wood:#D5C7B6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Nunito Sans',sans-serif;text-align:center;line-height:1.6}
+html[lang="ar"] body{font-family:'Cairo',sans-serif}
+html[lang="ar"] .serif,html[lang="ar"] .script{font-family:'Amiri',serif;font-weight:700}
+.serif{font-family:'Lora',serif}.script{font-family:'Alex Brush',cursive}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+/* Rustic Cover Screen (No External Images Needed) */
+#cover{position:fixed;inset:0;z-index:99;background:radial-gradient(circle at center,#4B3B2F 0%,#2B211A 100%);display:flex;align-items:center;justify-content:center;padding:20px;color:#FAF6F0;transition:opacity .5s,visibility .5s}
+#cover.hide{opacity:0;visibility:hidden;pointer-events:none}
+.c-box{border:1px solid rgba(250,246,240,.4);outline:1px solid rgba(250,246,240,.2);outline-offset:-8px;padding:42px 24px;max-width:480px;width:100%;background:rgba(35,26,20,.65);border-radius:6px}
+.c-names{font-family:'Alex Brush',cursive;font-size:clamp(3.2rem,10vw,4.6rem);line-height:1.1;margin:12px 0;color:#FFF}
+.c-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.c-btn{padding:12px 22px;border:none;border-radius:4px;color:#FFF;font-weight:600;cursor:pointer;min-width:150px;font-size:.92rem}
 
-        body {
-            background-color: var(--parchment);
-            background-image: radial-gradient(#DFD5C7 0.75px, transparent 0.75px);
-            background-size: 18px 18px;
-            color: var(--bark-brown);
-            font-family: 'Nunito Sans', sans-serif;
-            line-height: 1.7;
-            text-align: center;
-            overflow-x: hidden;
-        }
+/* Main Invitation */
+.top-bar{max-width:680px;margin:12px auto 0;padding:0 16px;text-align:end}
+.lang-btn{background:var(--card);border:1px solid var(--wood);color:var(--ink);padding:6px 14px;border-radius:20px;font-weight:600;cursor:pointer}
+.wrap{max-width:680px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:2px solid var(--wood);outline:1px solid var(--sage);outline-offset:-8px;padding:38px 20px;margin-bottom:24px;border-radius:6px}
+.tag{text-transform:uppercase;letter-spacing:2.5px;font-size:.76rem;font-weight:600;color:var(--sage);margin-bottom:10px}
+html[lang="ar"] .tag{letter-spacing:0;font-size:.92rem}
+.names{font-size:clamp(3.3rem,9vw,5rem);line-height:1.1;margin:8px 0}
+.amp{font-family:'Lora',serif;font-style:italic;color:var(--terra);font-size:2.2rem;display:block}
+.cd{display:flex;justify-content:center;gap:10px;margin-top:24px;direction:ltr}
+.t-box{background:var(--bg);border:1px dashed var(--sage);padding:10px 12px;min-width:66px;border-radius:5px}
+.t-box span{display:block;font-family:'Lora',serif;font-size:1.6rem;font-weight:600;color:var(--terra)}
+.t-box small{font-size:.65rem;text-transform:uppercase;color:var(--muted);font-weight:600}
+.btn{display:inline-block;margin-top:14px;padding:12px 24px;background:var(--sage);color:#FFF;text-decoration:none;border-radius:4px;font-weight:600;font-size:.88rem;border:none;cursor:pointer}
+.form{display:flex;flex-direction:column;gap:12px;max-width:420px;margin:18px auto 0}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--wood);background:var(--bg);border-radius:4px;font-family:inherit;color:var(--ink)}
+#msg{display:none;margin-top:14px;padding:12px;background:#DCE3D8;border:1px solid var(--sage);border-radius:4px}
+footer{padding:24px;font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
 
-        /* Arabic Typography Overrides */
-        html[lang="ar"] body {
-            font-family: 'Cairo', sans-serif;
-        }
+<div id="cover">
+  <div class="c-box">
+    <svg width="46" height="46" viewBox="0 0 64 64" fill="none" stroke="#B7C9B0" stroke-width="2.2"><path d="M32 58V8M32 44C22 44 14 37 14 27c9 0 18 7 18 17zm0-10c10 0 18-7 18-17-9 0-18 7-18 17zm0-12c-8 0-14-5-14-13 7 0 14 5 14 13z"/></svg>
+    <p style="letter-spacing:2px;font-size:.78rem;text-transform:uppercase;color:#DFD3C3;margin-top:8px">Wedding Invitation • دعوة زفاف</p>
+    <div class="c-names">Mohamed &amp; Ghada</div>
+    <p class="serif" style="letter-spacing:2px;color:#EAE0D5">03 . 12 . 2026</p>
+    <div class="c-btns">
+      <button class="c-btn" style="background:var(--sage)" onclick="start('en')">Open in English</button>
+      <button class="c-btn" style="background:var(--terra);font-family:'Cairo',sans-serif" onclick="start('ar')">فتح الدعوة بالعربية</button>
+    </div>
+  </div>
+</div>
 
-        html[lang="ar"] .serif,
-        html[lang="ar"] h1,
-        html[lang="ar"] h2,
-        html[lang="ar"] h3 {
-            font-family: 'Amiri', serif;
-        }
+<div class="top-bar"><button class="lang-btn" id="lBtn" onclick="toggle()">عربي</button></div>
 
-        html[lang="ar"] .script {
-            font-family: 'Amiri', serif;
-            font-weight: 700;
-        }
+<div class="wrap">
+  <div class="card">
+    <svg width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="#586B53" stroke-width="2.2"><path d="M32 58V8M32 44C22 44 14 37 14 27c9 0 18 7 18 17zm0-10c10 0 18-7 18-17-9 0-18 7-18 17zm0-12c-8 0-14-5-14-13 7 0 14 5 14 13z"/></svg>
+    <p class="tag" data-k="t1">Together with their families</p>
+    <h1 class="names script"><span data-k="g">Mohamed</span><span class="amp">&amp;</span><span data-k="b">Ghada</span></h1>
+    <p class="serif" style="font-size:1.25rem;margin-top:10px" data-k="d1">Thursday, December 3, 2026</p>
+    <p style="color:var(--muted)" data-k="v1">La Novia Wedding Hall</p>
+    <div class="cd" id="cd">
+      <div class="t-box"><span id="d">--</span><small data-k="dy">Days</small></div>
+      <div class="t-box"><span id="h">--</span><small data-k="hr">Hours</small></div>
+      <div class="t-box"><span id="m">--</span><small data-k="mn">Mins</small></div>
+      <div class="t-box"><span id="s">--</span><small data-k="sc">Secs</small></div>
+    </div>
+  </div>
 
-        h1, h2, h3, .serif {
-            font-family: 'Lora', serif;
-            font-weight: 500;
-        }
+  <div class="card">
+    <p class="tag" data-k="t2">Wedding Celebration</p>
+    <p style="color:var(--muted);margin-bottom:18px" data-k="intro">We warmly invite you to share in our joy as we celebrate our marriage.</p>
+    <p class="tag" data-k="wl">Date &amp; Time</p>
+    <p class="serif" style="font-size:1.35rem" data-k="d2">December 3, 2026 — 7:00 PM</p>
+    <br>
+    <p class="tag" data-k="vl">Location</p>
+    <p class="serif" style="font-size:1.35rem" data-k="v1">La Novia Wedding Hall</p>
+    <p style="font-size:.9rem;color:var(--muted)" data-k="addr">Cairo - Suez Road, near Madinaty</p>
+    <a class="btn" href="https://google.com" target="_blank" rel="noopener" data-k="map">Open Google Maps</a>
+  </div>
 
-        .script {
-            font-family: 'Alex Brush', cursive;
-            font-weight: 400;
-        }
+  <div class="card">
+    <p class="tag" data-k="rt">RSVP</p>
+    <p style="color:var(--muted)" data-k="rs">Please confirm your attendance</p>
+    <form class="form" id="rForm">
+      <input type="text" id="gn" data-pe="Your Full Name" data-pa="الاسم بالكامل" placeholder="Your Full Name" required>
+      <select id="at" required>
+        <option value="" disabled selected data-k="sp">Will you attend?</option>
+        <option value="yes" data-k="oy">Joyfully Accepts</option>
+        <option value="no" data-k="on">Regretfully Declines</option>
+      </select>
+      <input type="number" min="1" max="10" data-pe="Number of Guests" data-pa="عدد الحضور" placeholder="Number of Guests" required>
+      <textarea rows="2" data-pe="Message for Mohamed & Ghada" data-pa="كلمة تهنئة لمحمد وغادة" placeholder="Message for Mohamed & Ghada"></textarea>
+      <button type="submit" class="btn" style="background:var(--terra);width:100%" data-k="sb">Send RSVP</button>
+    </form>
+    <div id="msg"></div>
+  </div>
+</div>
 
-        /* Full-Screen Rustic Cover Overlay */
-        #cover-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: linear-gradient(rgba(36, 28, 22, 0.58), rgba(36, 28, 22, 0.72)),
-                        url('https://unsplash.com') center/cover no-repeat;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
-            color: #FAF6F0;
-            transition: opacity 0.7s ease, visibility 0.7s ease;
-        }
+<footer><p class="script" style="font-size:1.9rem;color:var(--ink)" data-k="fn">Mohamed &amp; Ghada</p><p data-k="fd">03.12.2026 • La Novia Wedding Hall</p></footer>
 
-        #cover-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .cover-frame {
-            border: 1px solid rgba(250, 246, 240, 0.45);
-            outline: 1px solid rgba(250, 246, 240, 0.25);
-            outline-offset: -8px;
-            padding: 45px 28px;
-            max-width: 520px;
-            width: 100%;
-            background: rgba(44, 34, 27, 0.35);
-            backdrop-filter: blur(4px);
-            border-radius: 6px;
-        }
-
-        .cover-tag {
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.75rem;
-            color: #E6D7C3;
-            margin-bottom: 12px;
-        }
-
-        .cover-names {
-            font-family: 'Alex Brush', cursive;
-            font-size: clamp(3.4rem, 10vw, 5rem);
-            line-height: 1.1;
-            color: #FFFFFF;
-            margin: 10px 0;
-        }
-
-        .cover-date {
-            font-family: 'Lora', serif;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            color: #F2E8DC;
-            margin-bottom: 28px;
-        }
-
-        .cover-buttons {
-            display: flex;
-            gap: 14px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cover-btn {
-            padding: 13px 26px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: transform 0.2s ease, background-color 0.3s ease;
-            min-width: 155px;
-        }
-
-        .cover-btn-en {
-            background-color: var(--sage-green);
-            color: #FFFFFF;
-            border: 1px solid var(--sage-green);
-            font-family: 'Nunito Sans', sans-serif;
-            text-transform: uppercase;
-        }
-
-        .cover-btn-ar {
-            background-color: var(--terracotta);
-            color: #FFFFFF;
-            border: 1px solid var(--terracotta);
-            font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-        }
-
-        .cover-btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.94;
-        }
-
-        /* Floating Language Toggle Bar */
-        .lang-bar {
-            display: flex;
-            justify-content: flex-end;
-            max-width: 720px;
-            margin: 14px auto 0;
-            padding: 0 20px;
-        }
-
-        .lang-toggle {
-            background: var(--kraft-card);
-            border: 1px solid var(--border-wood);
-            color: var(--bark-brown);
-            padding: 7px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .lang-toggle:hover {
-            border-color: var(--sage-green);
-            color: var(--sage-green);
-        }
-
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 88vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--kraft-card);
-            border: 2px solid var(--border-wood);
-            outline: 1px solid var(--sage-green);
-            outline-offset: -10px;
-            margin: 16px auto 20px;
-            max-width: 680px;
-            padding: 46px 24px;
-            position: relative;
-            box-shadow: 0 12px 35px rgba(62, 50, 41, 0.06);
-        }
-
-        .botanical-icon {
-            width: 54px;
-            height: 54px;
-            margin-bottom: 14px;
-        }
-
-        .subtitle {
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: var(--sage-green);
-            margin-bottom: 14px;
-        }
-
-        html[lang="ar"] .subtitle {
-            letter-spacing: 0;
-            font-size: 0.95rem;
-        }
-
-        .names {
-            font-size: clamp(3.5rem, 9vw, 5.5rem);
-            line-height: 1.1;
-            color: var(--bark-brown);
-            margin: 8px 0;
-        }
-
-        .ampersand {
-            font-family: 'Lora', serif;
-            font-style: italic;
-            color: var(--terracotta);
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            display: block;
-            margin: 4px 0;
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin: 24px auto;
-            width: 180px;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background-color: var(--border-wood);
-        }
-
-        .divider-dot {
-            width: 7px;
-            height: 7px;
-            background-color: var(--sage-green);
-            border-radius: 50%;
-        }
-
-        .date-banner {
-            font-size: 1.35rem;
-            letter-spacing: 1px;
-            color: var(--bark-brown);
-            margin-bottom: 6px;
-        }
-
-        .venue-banner {
-            font-size: 1.05rem;
-            color: var(--warm-taupe);
-            font-style: italic;
-            font-family: 'Lora', serif;
-        }
-
-        html[lang="ar"] .venue-banner {
-            font-style: normal;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        /* Countdown */
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 32px;
-            flex-wrap: wrap;
-            direction: ltr;
-        }
-
-        .time-box {
-            background: var(--parchment);
-            border: 1px dashed var(--sage-green);
-            padding: 13px 15px;
-            min-width: 72px;
-            border-radius: 6px;
-        }
-
-        .time-box span {
-            display: block;
-            font-family: 'Lora', serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--terracotta);
-            line-height: 1.1;
-        }
-
-        .time-box small {
-            font-size: 0.68rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--warm-taupe);
-            font-weight: 600;
-        }
-
-        /* Sections */
-        section {
-            padding: 50px 20px;
-        }
-
-        .section-title {
-            font-size: 2.25rem;
-            color: var(--bark-brown);
-            margin-bottom: 12px;
-        }
-
-        .details-card {
-            background: var(--kraft-card);
-            border: 1px solid var(--border-wood);
-            padding: 38px 24px;
-            border-radius: 8px;
-            margin-top: 24px;
-            box-shadow: 0 8px 24px rgba(62, 50, 41, 0.04);
-        }
-
-        .detail-item {
-            margin-bottom: 20px;
-        }
-
-        .detail-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .detail-label {
-            text-transform: uppercase;
-            font-size: 0.74rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            color: var(--sage-green);
-setInterval(updateCountdown, 1000);
-// Bilingual RSVP Confirmation
-document.getElementById("rsvpForm").addEventListener("submit", function(e) {
-e.preventDefault();
-const name = document.getElementById("guestName").value;
-const status = document.getElementById("attendance").value;
-const msgBox = document.getElementById("rsvpMessage");
-msgBox.style.display = "block";
-if (currentLang === 'ar') {
-const arStatus = status === 'accept' ? 'تأكيد الحضور' : 'الاعتذار عن الحضور';
-msgBox.innerHTML = شكراً لك يا <strong>${name}</strong>! تم تسجيل ردك (<em>${arStatus}</em>) بنجاح.;
-} else {
-const enStatus = status === 'accept' ? 'Joyfully Accepts' : 'Regretfully Declines';
-msgBox.innerHTML = Thank you, <strong>${name}</strong>! Your response (<em>${enStatus}</em>) has been saved.;
+<script>
+let lang='en';
+const txt={
+  en:{lBtn:'عربي',t1:'Together with their families',g:'Mohamed',b:'Ghada',d1:'Thursday, December 3, 2026',v1:'La Novia Wedding Hall',dy:'Days',hr:'Hours',mn:'Mins',sc:'Secs',t2:'Wedding Celebration',intro:'We warmly invite you to share in our joy as we celebrate our marriage.',wl:'Date & Time',d2:'December 3, 2026 — 7:00 PM',vl:'Location',addr:'Cairo - Suez Road, near Madinaty',map:'Open Google Maps',rt:'RSVP',rs:'Please confirm your attendance',sp:'Will you attend?',oy:'Joyfully Accepts',on:'Regretfully Declines',sb:'Send RSVP',fn:'Mohamed & Ghada',fd:'03.12.2026 • La Novia Wedding Hall'},
+  ar:{lBtn:'English',t1:'يتشرفان بدعوتكم لحضور حفل زفافهما',g:'محمد',b:'غادة',d1:'الخميس، ٣ ديسمبر ٢٠٢٦',v1:'قاعة لا نوفيا (La Novia)',dy:'يوم',hr:'ساعة',mn:'دقيقة',sc:'ثانية',t2:'حفل الزفاف',intro:'بكل الحب والسرور، ندعوكم لمشاركتنا فرحتنا الكبرى في ليلة العمر.',wl:'التاريخ والوقت',d2:'٣ ديسمبر ٢٠٢٦ — ٧:٠٠ مساءً',vl:'المكان',addr:'طريق القاهرة - السويس، بجوار مدينتي',map:'فتح الموقع على خرائط جوجل',rt:'تأكيد الحضور',rs:'يرجى تأكيد حضوركم',sp:'هل ستشرفنا بالحضور؟',oy:'بكل سرور، سأحضر',on:'أعتذر عن الحضور',sb:'إرسال التأكيد',fn:'محمد و غادة',fd:'٣ ديسمبر ٢٠٢٦ • قاعة لا نوفيا'}
+};
+function setL(l){
+  lang=l;document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  document.getElementById('lBtn').innerText=txt[l].lBtn;
+  document.querySelectorAll('[data-k]').forEach(e=>{if(txt[l][e.dataset.k])e.innerText=txt[l][e.dataset.k]});
+  document.querySelectorAll('[data-pe]').forEach(e=>{e.placeholder=l==='ar'?e.dataset.pa:e.dataset.pe});
 }
+function start(l){setL(l);document.getElementById('cover').classList.add('hide')}
+function toggle(){setL(lang==='en'?'ar':'en')}
+
+const target=new Date("2026-12-03T19:00:00+02:00").getTime();
+function tick(){
+  const diff=target-Date.now();
+  if(diff<=0){document.getElementById('cd').innerHTML="<b>Today is the day!</b>";return}
+  document.getElementById('d').innerText=String(Math.floor(diff/864e5)).padStart(2,'0');
+  document.getElementById('h').innerText=String(Math.floor(diff%864e5/36e5)).padStart(2,'0');
+  document.getElementById('m').innerText=String(Math.floor(diff%36e5/6e4)).padStart(2,'0');
+  document.getElementById('s').innerText=String(Math.floor(diff%6e4/1e3)).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+
+document.getElementById('rForm').onsubmit=function(e){
+  e.preventDefault();
+const n=document.getElementById('gn').value,m=document.getElementById('msg');
+m.style.display='block';
+m.innerHTML=lang==='ar'?شكراً لك يا <b>${n}</b>! تم تسجيل ردك بنجاح.:Thank you, <b>${n}</b>! Your response has been saved.;
 this.reset();
-});
+};
