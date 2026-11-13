@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed & Ghada | Rustic Wedding Invitation</title>
+    <title>Mohamed &amp; Ghada | Wedding Invitation</title>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Alex+Brush&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --parchment: #F5EFE6;
@@ -36,6 +36,23 @@
             overflow-x: hidden;
         }
 
+        /* Arabic Typography Overrides */
+        html[lang="ar"] body {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        html[lang="ar"] .serif,
+        html[lang="ar"] h1,
+        html[lang="ar"] h2,
+        html[lang="ar"] h3 {
+            font-family: 'Amiri', serif;
+        }
+
+        html[lang="ar"] .script {
+            font-family: 'Amiri', serif;
+            font-weight: 700;
+        }
+
         h1, h2, h3, .serif {
             font-family: 'Lora', serif;
             font-weight: 500;
@@ -46,6 +63,129 @@
             font-weight: 400;
         }
 
+        /* Full-Screen Rustic Cover Overlay */
+        #cover-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: linear-gradient(rgba(36, 28, 22, 0.58), rgba(36, 28, 22, 0.72)),
+                        url('https://unsplash.com') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            color: #FAF6F0;
+            transition: opacity 0.7s ease, visibility 0.7s ease;
+        }
+
+        #cover-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .cover-frame {
+            border: 1px solid rgba(250, 246, 240, 0.45);
+            outline: 1px solid rgba(250, 246, 240, 0.25);
+            outline-offset: -8px;
+            padding: 45px 28px;
+            max-width: 520px;
+            width: 100%;
+            background: rgba(44, 34, 27, 0.35);
+            backdrop-filter: blur(4px);
+            border-radius: 6px;
+        }
+
+        .cover-tag {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.75rem;
+            color: #E6D7C3;
+            margin-bottom: 12px;
+        }
+
+        .cover-names {
+            font-family: 'Alex Brush', cursive;
+            font-size: clamp(3.4rem, 10vw, 5rem);
+            line-height: 1.1;
+            color: #FFFFFF;
+            margin: 10px 0;
+        }
+
+        .cover-date {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            color: #F2E8DC;
+            margin-bottom: 28px;
+        }
+
+        .cover-buttons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cover-btn {
+            padding: 13px 26px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+            min-width: 155px;
+        }
+
+        .cover-btn-en {
+            background-color: var(--sage-green);
+            color: #FFFFFF;
+            border: 1px solid var(--sage-green);
+            font-family: 'Nunito Sans', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .cover-btn-ar {
+            background-color: var(--terracotta);
+            color: #FFFFFF;
+            border: 1px solid var(--terracotta);
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+        }
+
+        .cover-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.94;
+        }
+
+        /* Floating Language Toggle Bar */
+        .lang-bar {
+            display: flex;
+            justify-content: flex-end;
+            max-width: 720px;
+            margin: 14px auto 0;
+            padding: 0 20px;
+        }
+
+        .lang-toggle {
+            background: var(--kraft-card);
+            border: 1px solid var(--border-wood);
+            color: var(--bark-brown);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .lang-toggle:hover {
+            border-color: var(--sage-green);
+            color: var(--sage-green);
+        }
+
         .container {
             max-width: 720px;
             margin: 0 auto;
@@ -54,7 +194,7 @@
 
         /* Hero Section */
         .hero {
-            min-height: 92vh;
+            min-height: 88vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -63,8 +203,9 @@
             border: 2px solid var(--border-wood);
             outline: 1px solid var(--sage-green);
             outline-offset: -10px;
-            margin: 20px;
-            padding: 50px 24px;
+            margin: 16px auto 20px;
+            max-width: 680px;
+            padding: 46px 24px;
             position: relative;
             box-shadow: 0 12px 35px rgba(62, 50, 41, 0.06);
         }
@@ -72,22 +213,26 @@
         .botanical-icon {
             width: 54px;
             height: 54px;
-            fill: var(--sage-green);
             margin-bottom: 14px;
         }
 
         .subtitle {
             text-transform: uppercase;
-            letter-spacing: 3.5px;
-            font-size: 0.75rem;
+            letter-spacing: 3px;
+            font-size: 0.78rem;
             font-weight: 600;
             color: var(--sage-green);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
+        }
+
+        html[lang="ar"] .subtitle {
+            letter-spacing: 0;
+            font-size: 0.95rem;
         }
 
         .names {
-            font-size: clamp(3.6rem, 9vw, 5.8rem);
-            line-height: 1.05;
+            font-size: clamp(3.5rem, 9vw, 5.5rem);
+            line-height: 1.1;
             color: var(--bark-brown);
             margin: 8px 0;
         }
@@ -96,7 +241,7 @@
             font-family: 'Lora', serif;
             font-style: italic;
             color: var(--terracotta);
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(2rem, 5vw, 2.8rem);
             display: block;
             margin: 4px 0;
         }
@@ -106,7 +251,7 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            margin: 26px auto;
+            margin: 24px auto;
             width: 180px;
         }
 
@@ -127,59 +272,65 @@
 
         .date-banner {
             font-size: 1.35rem;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             color: var(--bark-brown);
             margin-bottom: 6px;
         }
 
         .venue-banner {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: var(--warm-taupe);
             font-style: italic;
             font-family: 'Lora', serif;
+        }
+
+        html[lang="ar"] .venue-banner {
+            font-style: normal;
+            font-family: 'Cairo', sans-serif;
         }
 
         /* Countdown */
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 14px;
-            margin-top: 34px;
+            gap: 12px;
+            margin-top: 32px;
             flex-wrap: wrap;
+            direction: ltr;
         }
 
         .time-box {
             background: var(--parchment);
             border: 1px dashed var(--sage-green);
-            padding: 14px 16px;
-            min-width: 74px;
+            padding: 13px 15px;
+            min-width: 72px;
             border-radius: 6px;
         }
 
         .time-box span {
             display: block;
             font-family: 'Lora', serif;
-            font-size: 1.85rem;
+            font-size: 1.8rem;
             font-weight: 600;
             color: var(--terracotta);
             line-height: 1.1;
         }
 
         .time-box small {
-            font-size: 0.65rem;
+            font-size: 0.68rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             color: var(--warm-taupe);
             font-weight: 600;
         }
 
         /* Sections */
         section {
-            padding: 55px 20px;
+            padding: 50px 20px;
         }
 
         .section-title {
-            font-size: 2.3rem;
+            font-size: 2.25rem;
             color: var(--bark-brown);
             margin-bottom: 12px;
         }
@@ -187,14 +338,14 @@
         .details-card {
             background: var(--kraft-card);
             border: 1px solid var(--border-wood);
-            padding: 40px 25px;
+            padding: 38px 24px;
             border-radius: 8px;
-            margin-top: 25px;
+            margin-top: 24px;
             box-shadow: 0 8px 24px rgba(62, 50, 41, 0.04);
         }
 
         .detail-item {
-            margin-bottom: 22px;
+            margin-bottom: 20px;
         }
 
         .detail-item:last-child {
@@ -203,133 +354,7 @@
 
         .detail-label {
             text-transform: uppercase;
-            font-size: 0.72rem;
+            font-size: 0.74rem;
             font-weight: 600;
-            letter-spacing: 2.5px;
-            color: var(--sage-green);
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .detail-value {
-            font-family: 'Lora', serif;
-            font-size: 1.55rem;
-            color: var(--bark-brown);
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 16px;
-            padding: 12px 28px;
-            background-color: var(--sage-green);
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
             letter-spacing: 2px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #465742;
-        }
-
-        /* RSVP Form */
-        .rsvp-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 450px;
-            margin: 25px auto 0;
-            text-align: left;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--border-wood);
-            background: var(--parchment);
-            font-family: 'Nunito Sans', sans-serif;
-            font-size: 0.92rem;
-            color: var(--bark-brown);
-            border-radius: 4px;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--sage-green);
-        }
-
-        .rsvp-message {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background: var(--sage-light);
-            border: 1px solid var(--sage-green);
-            color: var(--bark-brown);
-            font-size: 0.92rem;
-            border-radius: 4px;
-        }
-
-        footer {
-            padding: 40px 20px;
-            font-size: 0.85rem;
-            color: var(--warm-taupe);
-            border-top: 1px dashed var(--border-wood);
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Hero Cover -->
-    <div class="hero">
-        <!-- Simple Botanical Leaf SVG -->
-        <svg class="botanical-icon" viewBox="0 0 64 64" xmlns="http://w3.org">
-            <path d="M32 58C32 42 32 24 32 8M32 44C22 44 14 37 14 27C23 27 32 34 32 44ZM32 34C42 34 50 27 50 17C41 17 32 24 32 34ZM32 22C24 22 18 17 18 9C25 9 32 14 32 22Z" stroke="#586B53" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-
-        <p class="subtitle">Together with their families</p>
-        <h1 class="names script">
-            Mohamed
-            <span class="ampersand">&amp;</span>
-            Ghada
-        </h1>
-
-        <div class="divider"><span class="divider-dot"></span></div>
-
-        <p class="date-banner serif">Thursday, December 3, 2026</p>
-        <p class="venue-banner">La Novia Wedding Hall</p>
-
-        <!-- Live Countdown -->
-        <div class="countdown" id="countdown">
-            <div class="time-box"><span id="days">00</span><small>Days</small></div>
-            <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
-            <div class="time-box"><span id="minutes">00</span><small>Mins</small></div>
-            <div class="time-box"><span id="seconds">00</span><small>Secs</small></div>
-        </div>
-    </div>
-
-    <!-- Event Details -->
-    <section class="container">
-        <p class="subtitle">Save The Date</p>
-        <h2 class="section-title">Wedding Celebration</h2>
-        <p style="color: var(--warm-taupe); max-width: 520px; margin: 0 auto;">
-            We warmly invite you to gather with us for an evening of love, laughter, and celebration as we begin our new chapter together.
-        </p>
-
-        <div class="details-card">
-            <div class="detail-item">
-                <span class="detail-label">The Date &amp; Time</span>
-                <p class="detail-value">December 3, 2026</p>
-                <p style="font-size: 0.92rem; color: var(--warm-taupe);">Reception begins at 7:00 PM</p>
-            </div>
-
-            <div class="divider"><span class="divider-dot"></span></div>
-
-            <div class="detail-item">
-                <span class="detail-label">The Venue</span>
-                <p class="detail-value">La Novia Wedding Hall</p>
+            color: var(--sage-green);
