@@ -70,13 +70,15 @@ input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood
 
   <div class="card">
     <p class="tag" data-k="rt">Attending Confirmation</p>
-    <form id="rf" onsubmit="sendGF(event)">
-      <input type="text" id="gn" placeholder="Full Name / الاسم بالكامل" required>
-      <select id="at" required>
+    <form action="https://google.com" method="GET">
+      <input type="hidden" name="usp" value="pp_url">
+      <input type="text" name="entry.1296090911" placeholder="Full Name / الاسم بالكامل" required>
+      <select name="entry.1107110130" id="at" onchange="sync()" required>
         <option value="" disabled selected data-k="sp">Will you attend? / هل ستحضر؟</option>
         <option value="YES" data-k="oy">Joyfully Accepts / سأحضر بكل سرور</option>
         <option value="NO" data-k="on">Regretfully Declines / أعتذر عن الحضور</option>
       </select>
+      <input type="hidden" name="entry.760048277" id="gi" value="1">
       <div class="qty">
         <span data-k="gl">Guests / عدد الحضور</span>
         <div style="display:flex;align-items:center;gap:10px;direction:ltr">
@@ -91,7 +93,6 @@ input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood
 </div>
 
 <script>
-const GF="https://google.com";
 let L='en',c=1;
 const T={
   en:{lb:'عربي',t1:'Together with their families',g:'Mohamed',b:'Ghada',d1:'Thursday, December 3, 2026',v1:'La Novia Wedding Hall',dy:'Days',hr:'Hours',mn:'Mins',sc:'Secs',t2:'Location & Time',d2:'December 3, 2026 — 7:00 PM',mp:'Open Google Maps',rt:'Attending Confirmation',sp:'Will you attend?',oy:'Joyfully Accepts',on:'Regretfully Declines',gl:'Guests',sb:'Confirm'},
@@ -100,17 +101,11 @@ const T={
 function setL(l){L=l;document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';document.getElementById('lb').innerText=T[l].lb;document.querySelectorAll('[data-k]').forEach(e=>e.innerText=T[l][e.dataset.k])}
 function go(l){setL(l);document.getElementById('cover').classList.add('hide');document.getElementById('mn').classList.add('show')}
 function tog(){setL(L==='en'?'ar':'en')}
-function st(n){c=Math.min(10,Math.max(1,c+n));document.getElementById('gc').innerText=c}
+function sync(){document.getElementById('gi').value=document.getElementById('at').value==='NO'?0:c}
+function st(n){c=Math.min(10,Math.max(1,c+n));document.getElementById('gc').innerText=c;sync()}
 const tg=new Date("2026-12-03T19:00:00+02:00").getTime();
 function tk(){const df=tg-Date.now();if(df<=0)return;document.getElementById('d').innerText=Math.floor(df/864e5);document.getElementById('h').innerText=String(Math.floor(df%864e5/36e5)).padStart(2,'0');document.getElementById('m').innerText=String(Math.floor(df%36e5/6e4)).padStart(2,'0');document.getElementById('s').innerText=String(Math.floor(df%6e4/1e3)).padStart(2,'0')}
 tk();setInterval(tk,1000);
-
-function sendGF(e){
-  e.preventDefault();
-  const stVal=document.getElementById('at').value,cnt=stVal==='YES'?c:0;
-  const nm=encodeURIComponent(document.getElementById('gn').value.trim());
-  window.location.href=`${GF}&entry.1296090911=${nm}&entry.1107110130=${stVal}&entry.760048277=${cnt}`;
-}
 </script>
 </body>
 </html>
