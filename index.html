@@ -17,7 +17,7 @@ html[lang="ar"] .script{font-family:'Amiri',serif;font-weight:700}
 .c-box{border:1px solid rgba(250,246,240,.4);padding:40px 22px;max-width:440px;width:100%;border-radius:6px}
 .c-btn{padding:12px 20px;border:none;border-radius:4px;color:#FFF;font-weight:600;cursor:pointer;margin:6px;min-width:140px}
 .wrap{max-width:600px;margin:0 auto;padding:16px}
-.card{background:var(--card);border:2px solid var(--wood);padding:32px 18px;margin-bottom:18px;border-radius:6px;opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.card{background:var(--card);border:2px solid var(--wood);padding:32px 14px;margin-bottom:18px;border-radius:6px;opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
 .wrap.show .card{opacity:1;transform:translateY(0)}
 .wrap.show .card:nth-child(3){transition-delay:.15s}
 .wrap.show .card:nth-child(4){transition-delay:.3s}
@@ -28,9 +28,7 @@ html[lang="ar"] .tag{letter-spacing:0;font-size:.9rem}
 .tb{background:var(--bg);border:1px dashed var(--sage);padding:8px 10px;min-width:60px;border-radius:4px}
 .tb span{display:block;font-size:1.4rem;font-weight:600;color:var(--terra)}
 .btn{display:inline-block;margin-top:14px;padding:11px 22px;background:var(--sage);color:#FFF;text-decoration:none;border-radius:4px;font-weight:600;border:none;cursor:pointer}
-input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood);background:var(--bg);border-radius:4px;font-family:inherit}
-.qty{display:flex;align-items:center;justify-content:space-between;background:var(--bg);border:1px solid var(--wood);border-radius:4px;padding:6px 12px;margin-top:10px}
-.qb{width:30px;height:30px;border:none;border-radius:4px;background:var(--sage);color:#FFF;font-size:1.1rem;font-weight:600;cursor:pointer}
+.gf{width:100%;height:680px;border:none;margin-top:10px;border-radius:4px}
 </style>
 </head>
 <body>
@@ -65,61 +63,27 @@ input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood
     <p class="tag" data-k="t2">Location &amp; Time</p>
     <p style="font-size:1.2rem" data-k="d2">December 3, 2026 — 7:00 PM</p>
     <p style="margin-top:8px" data-k="v1">La Novia Wedding Hall</p>
-    <a class="btn" href="https://goo.gl" data-k="mp">Open Google Maps</a>
+    <a class="btn" href="https://maps.app.goo.gl/kyrCTP49rPsMX3rB6?g_st=ac" data-k="mp">Open Google Maps</a>
   </div>
 
   <div class="card">
     <p class="tag" data-k="rt">Attending Confirmation</p>
-    <form id="rf" onsubmit="sendGF(event)">
-      <input type="text" id="gn" placeholder="Full Name / الاسم بالكامل" required>
-      <select id="at" required>
-        <option value="" disabled selected data-k="sp">Will you attend? / هل ستحضر؟</option>
-        <option value="YES" data-k="oy">Joyfully Accepts / سأحضر بكل سرور</option>
-        <option value="NO" data-k="on">Regretfully Declines / أعتذر عن الحضور</option>
-      </select>
-      <div class="qty">
-        <span data-k="gl">Guests / عدد الحضور</span>
-        <div style="display:flex;align-items:center;gap:10px;direction:ltr">
-          <button type="button" class="qb" onclick="st(-1)">-</button>
-          <b id="gc">1</b>
-          <button type="button" class="qb" onclick="st(1)">+</button>
-        </div>
-      </div>
-      <button type="submit" class="btn" id="sb" style="background:var(--terra);width:100%" data-k="sb">Confirm / تأكيد</button>
-    </form>
-    <p id="msg" style="margin-top:12px;color:var(--sage);font-weight:600"></p>
+    <iframe class="gf" src="https://docs.google.com/forms/d/e/1FAIpQLSdHjYZzT13fsAiW1yKCXdvt7hXNjSww9j7pKkrslmJl9zVB8w/viewform?embedded=true">Loading…</iframe>
   </div>
 </div>
 
 <script>
-const GF="https://google.com";
-let L='en',c=1;
+let L='en';
 const T={
-  en:{lb:'عربي',t1:'Together with their families',g:'Mohamed',b:'Ghada',d1:'Thursday, December 3, 2026',v1:'La Novia Wedding Hall',dy:'Days',hr:'Hours',mn:'Mins',sc:'Secs',t2:'Location & Time',d2:'December 3, 2026 — 7:00 PM',mp:'Open Google Maps',rt:'Attending Confirmation',sp:'Will you attend?',oy:'Joyfully Accepts',on:'Regretfully Declines',gl:'Guests',sb:'Confirm'},
-  ar:{lb:'English',t1:'يتشرفان بدعوتكم لحضور حفل زفافهما',g:'محمد',b:'غادة',d1:'الخميس، ٣ ديسمبر ٢٠٢٦',v1:'قاعة لا نوفيا (La Novia)',dy:'يوم',hr:'ساعة',mn:'دقيقة',sc:'ثانية',t2:'المكان والوقت',d2:'٣ ديسمبر ٢٠٢٦ — ٧:٠٠ مساءً',mp:'فتح الموقع في خرائط جوجل',rt:'تأكيد الحضور',sp:'هل ستشرفنا بالحضور؟',oy:'بكل سرور، سأحضر',on:'أعتذر عن الحضور',gl:'عدد الحضور',sb:'إرسال التأكيد'}
+  en:{lb:'عربي',t1:'Together with their families',g:'Mohamed',b:'Ghada',d1:'Thursday, December 3, 2026',v1:'La Novia Wedding Hall',dy:'Days',hr:'Hours',mn:'Mins',sc:'Secs',t2:'Location & Time',d2:'December 3, 2026 — 7:00 PM',mp:'Open Google Maps',rt:'Attending Confirmation'},
+  ar:{lb:'English',t1:'يتشرفان بدعوتكم لحضور حفل زفافهما',g:'محمد',b:'غادة',d1:'الخميس، ٣ ديسمبر ٢٠٢٦',v1:'قاعة لا نوفيا (La Novia)',dy:'يوم',hr:'ساعة',mn:'دقيقة',sc:'ثانية',t2:'المكان والوقت',d2:'٣ ديسمبر ٢٠٢٦ — ٧:٠٠ مساءً',mp:'فتح الموقع في خرائط جوجل',rt:'تأكيد الحضور'}
 };
 function setL(l){L=l;document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';document.getElementById('lb').innerText=T[l].lb;document.querySelectorAll('[data-k]').forEach(e=>e.innerText=T[l][e.dataset.k])}
 function go(l){setL(l);document.getElementById('cover').classList.add('hide');document.getElementById('mn').classList.add('show')}
 function tog(){setL(L==='en'?'ar':'en')}
-function st(n){c=Math.min(10,Math.max(1,c+n));document.getElementById('gc').innerText=c}
 const tg=new Date("2026-12-03T19:00:00+02:00").getTime();
 function tk(){const df=tg-Date.now();if(df<=0)return;document.getElementById('d').innerText=Math.floor(df/864e5);document.getElementById('h').innerText=String(Math.floor(df%864e5/36e5)).padStart(2,'0');document.getElementById('m').innerText=String(Math.floor(df%36e5/6e4)).padStart(2,'0');document.getElementById('s').innerText=String(Math.floor(df%6e4/1e3)).padStart(2,'0')}
 tk();setInterval(tk,1000);
-
-function sendGF(e){
-  e.preventDefault();
-  const btn=document.getElementById('sb'),m=document.getElementById('msg');
-  const stVal=document.getElementById('at').value,cnt=stVal==='YES'?c:0;
-  btn.disabled=true;
-  const fd=new FormData();
-  fd.append("entry.1296090911",document.getElementById('gn').value.trim());
-  fd.append("entry.1107110130",stVal);
-  fd.append("entry.760048277",cnt);
-  fetch(GF,{method:'POST',mode:'no-cors',body:fd}).then(()=>{
-    m.innerText=L==='ar'?'شكراً لك! تم تسجيل تأكيد حضورك بنجاح.':'Thank you! Your confirmation has been recorded.';
-    document.getElementById('rf').reset();c=1;document.getElementById('gc').innerText=1;btn.disabled=false;
-  });
-}
 </script>
 </body>
 </html>
