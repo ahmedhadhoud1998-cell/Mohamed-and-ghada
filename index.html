@@ -65,7 +65,7 @@ input,select{width:100%;padding:10px;margin-top:10px;border:1px solid var(--wood
     <p class="tag" data-k="t2">Location &amp; Time</p>
     <p style="font-size:1.2rem" data-k="d2">December 3, 2026 — 7:00 PM</p>
     <p style="margin-top:8px" data-k="v1">La Novia Wedding Hall</p>
-    <a class="btn" href="https://maps.app.goo.gl/KsrSyC4jgVFpmXfw9?g_st=ac" data-k="mp">Open Google Maps</a>
+    <a class="btn" href="https://goo.gl" data-k="mp">Open Google Maps</a>
   </div>
 
   <div class="card">
@@ -110,12 +110,11 @@ function sendGF(e){
   e.preventDefault();
   const btn=document.getElementById('sb'),m=document.getElementById('msg');
   const stVal=document.getElementById('at').value,cnt=stVal==='YES'?c:0;
+  const nm=encodeURIComponent(document.getElementById('gn').value.trim());
+  const url=`${GF}?entry.1296090911=${nm}&entry.1107110130=${stVal}&entry.760048277=${cnt}&submit=Submit`;
   btn.disabled=true;
-  const p=new URLSearchParams();
-  p.append("entry.1296090911",document.getElementById('gn').value.trim());
-  p.append("entry.1107110130",stVal);
-  p.append("entry.760048277",cnt);
-  fetch(GF,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()}).then(()=>{
+  new Image().src=url;
+  fetch(url,{mode:'no-cors'}).finally(()=>{
     m.innerText=L==='ar'?'شكراً لك! تم تسجيل تأكيد حضورك بنجاح.':'Thank you! Your confirmation has been recorded.';
     document.getElementById('rf').reset();c=1;document.getElementById('gc').innerText=1;btn.disabled=false;
   });
