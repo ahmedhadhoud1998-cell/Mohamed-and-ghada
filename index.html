@@ -36,13 +36,13 @@ html[lang="ar"] .script,.vs{font-family:'Amiri',serif;font-weight:700}
 .wrap{max-width:600px;margin:0 auto;padding:0 16px 20px}
 .card{position:relative;background:radial-gradient(circle at top,#FFFDF9,var(--card));border:2px solid var(--wood);outline:1px solid var(--sage);outline-offset:-8px;padding:26px 14px;margin-bottom:18px;border-radius:6px;box-shadow:0 8px 22px rgba(62,50,41,.07);opacity:0;transform:translateY(20px);transition:opacity .8s ease .35s,transform .8s ease .35s}
 .wrap.show .card{opacity:1;transform:translateY(0)}
-.vs{font-size:1rem;color:var(--sage);margin-bottom:10px}
+.vs{font-size:1.05rem;color:var(--sage);margin-bottom:10px;direction:rtl}
 .tag{font-size:.76rem;font-weight:600;color:var(--sage);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
 html[lang="ar"] .tag{letter-spacing:0;font-size:.9rem}
 .names{font-size:clamp(3.1rem,9vw,4.6rem);line-height:1.1;margin:6px 0}
 
 .scr{position:relative;width:190px;height:62px;margin:12px auto;border:1.5px dashed var(--terra);border-radius:35px;display:flex;align-items:center;justify-content:center;background:#FFF;overflow:hidden}
-.scr b{font-size:1.15rem;color:var(--terra);letter-spacing:2px}
+.scr b{font-size:1.15rem;color:var(--terra);letter-spacing:2px;direction:ltr}
 #cv{position:absolute;inset:0;cursor:pointer;touch-action:none}
 
 .cd{display:flex;justify-content:center;gap:8px;margin-top:16px;direction:ltr}
@@ -71,7 +71,7 @@ html[lang="ar"] .tag{letter-spacing:0;font-size:.9rem}
   <div style="text-align:end;margin-bottom:10px"><button class="btn" style="margin:0;padding:6px 14px;font-size:.8rem" id="lb" onclick="tog()">عربي</button></div>
 
   <div class="card">
-    <p class="vs" data-k="vs">﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾</p>
+    <p class="vs">﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾</p>
     <p class="tag" data-k="t1">Together with their families</p>
     <h1 class="names script"><span data-k="g">Mohamed</span> &amp; <span data-k="b">Ghada</span></h1>
     <div class="scr"><b>03 . 12 . 2026</b><canvas id="cv" width="190" height="62"></canvas></div>
@@ -90,7 +90,7 @@ html[lang="ar"] .tag{letter-spacing:0;font-size:.9rem}
     <p style="font-size:1.15rem" data-k="d2">December 3, 2026 — 6:00 PM</p>
     <p style="margin-top:4px" data-k="v1">La Novia Wedding Hall</p>
     <a class="btn" href="https://goo.gl" data-k="mp">Open Google Maps</a>
-    <a class="btn" style="background:var(--terra)" href="https://google.com" target="_blank" data-k="cal">Add to Calendar</a>
+    <button type="button" class="btn" style="background:var(--terra)" onclick="addCal()" data-k="cal">Add to Calendar</button>
   </div>
 
   <div class="card">
@@ -102,13 +102,14 @@ html[lang="ar"] .tag{letter-spacing:0;font-size:.9rem}
 <script>
 let L='en';
 const T={
-  en:{lb:'عربي',vs:'"And of His signs is that He created for you mates from yourselves that you may find tranquility in them; and He placed between you affection and mercy."',t1:'Together with their families',g:'Mohamed',b:'Ghada',d1:'Thursday, December 3, 2026',v1:'La Novia Wedding Hall',dy:'Days',hr:'Hours',mn:'Mins',sc:'Secs',t2:'Location & Time',d2:'December 3, 2026 — 6:00 PM',mp:'Open Google Maps',cal:'Add to Calendar',rt:'Attending Confirmation',scT:'Scratch Date'},
-  ar:{lb:'English',vs:'﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾',t1:'يتشرفان بدعوتكم لحضور حفل زفافهما',g:'محمد',b:'غادة',d1:'الخميس، ٣ ديسمبر ٢٠٢٦',v1:'قاعة لا نوفيا (La Novia)',dy:'يوم',hr:'ساعة',mn:'دقيقة',sc:'ثانية',t2:'المكان والوقت',d2:'٣ ديسمبر ٢٠٢٦ — ٦:٠٠ مساءً',mp:'فتح الموقع في خرائط جوجل',cal:'إضافة للتقويم',rt:'تأكيد الحضور',scT:'اخربش التاريخ'}
+  en:{lb:'عربي',t1:'Together with their families',g:'Mohamed',b:'Ghada',d1:'Thursday, December 3, 2026',v1:'La Novia Wedding Hall',dy:'Days',hr:'Hours',mn:'Mins',sc:'Secs',t2:'Location & Time',d2:'December 3, 2026 — 6:00 PM',mp:'Open Google Maps',cal:'Add to Calendar',rt:'Attending Confirmation',scT:'Scratch Date'},
+  ar:{lb:'English',t1:'يتشرفان بدعوتكم لحضور حفل زفافهما',g:'محمد',b:'غادة',d1:'الخميس، ٣ ديسمبر ٢٠٢٦',v1:'قاعة لا نوفيا (La Novia)',dy:'يوم',hr:'ساعة',mn:'دقيقة',sc:'ثانية',t2:'المكان والوقت',d2:'٣ ديسمبر ٢٠٢٦ — ٦:٠٠ مساءً',mp:'فتح الموقع في خرائط جوجل',cal:'إضافة للتقويم',rt:'تأكيد الحضور',scT:'اخربش التاريخ'}
 };
 const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
 function drawScr(){ctx.globalCompositeOperation='source-over';ctx.fillStyle='#B5694D';ctx.fillRect(0,0,190,62);ctx.fillStyle='#FFF';ctx.font='600 14px sans-serif';ctx.textAlign='center';ctx.fillText(T[L].scT,95,36)}
-function scratch(e){const r=cv.getBoundingClientRect(),p=e.touches?e.touches:e;ctx.globalCompositeOperation='destination-out';ctx.beginPath();ctx.arc(p.clientX-r.left,p.clientY-r.top,16,0,7);ctx.fill()}
-cv.onmousemove=e=>{if(e.buttons)scratch(e)};cv.ontouchmove=e=>{e.preventDefault();scratch(e)};
+function scratch(e){const r=cv.getBoundingClientRect(),p=e.touches?e.touches:e;ctx.globalCompositeOperation='destination-out';ctx.beginPath();ctx.arc(p.clientX-r.left,p.clientY-r.top,18,0,7);ctx.fill()}
+cv.onmousemove=e=>{if(e.buttons)scratch(e)};cv.ontouchstart=scratch;cv.ontouchmove=e=>{e.preventDefault();scratch(e)};
+function addCal(){const ics="BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART:20261203T160000Z\nDTEND:20261203T210000Z\nSUMMARY:Mohamed & Ghada Wedding\nLOCATION:La Novia Wedding Hall\nDESCRIPTION:https://goo.gl\nEND:VEVENT\nEND:VCALENDAR";const a=document.createElement('a');a.href='data:text/calendar;charset=utf8,'+encodeURIComponent(ics);a.download='Mohamed-Ghada-Wedding.ics';a.click()}
 function setL(l){L=l;document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';document.getElementById('lb').innerText=T[l].lb;document.querySelectorAll('[data-k]').forEach(e=>e.innerText=T[l][e.dataset.k]);drawScr()}
 function go(l){setL(l);document.getElementById('cover').classList.add('open');document.getElementById('mn').classList.add('show')}
 function tog(){setL(L==='en'?'ar':'en')}
